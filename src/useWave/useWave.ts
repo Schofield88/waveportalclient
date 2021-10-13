@@ -1,19 +1,35 @@
-import { useState } from 'react';
-import { Contract } from 'ethers';
+import { useEffect, useState } from 'react';
+import { getContract } from '../utils/getContract';
 
 const useWave = () => {
-  const [numberOfWaves, updateNumberOfWaves] = useState<string>('0');
+  const [numberOfWaves, updateNumberOfWaves] = useState<string>('-');
 
-  const sendAWave = async (contract: Contract) => {
-    const wave = await contract.wave();
-    console.log('Mining: ', wave.hash);
-    await wave.wait();
-    console.log('Mined -- ', wave.hash);
+  const getWaves = () => {
+    const wavePortalContract = getContract();
 
-    contract.getTotalWaves().then((waves: number) => {
-      updateNumberOfWaves(waves.toString());
-    });
+    if (wavePortalContract) {
+      wavePortalContract.getTotalWaves().then((waves: number) => {
+        updateNumberOfWaves(waves.toString());
+      });
+    }
   };
+
+  const sendAWave = async () => {
+    const wavePortalContract = getContract();
+
+    if (wavePortalContract) {
+      const wave = await wavePortalContract.wave();
+      console.log('Mining: ', wave.hash);
+      await wave.wait();
+      console.log('Mined -- ', wave.hash);
+
+      getWaves();
+    }
+  };
+
+  useEffect(() => {
+    getWaves();
+  }, []);
 
   return { numberOfWaves, sendAWave };
 };
