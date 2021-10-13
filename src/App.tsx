@@ -1,6 +1,9 @@
-import { isWindowWithEthereum, useWallet } from './useWallet/useWallet';
 import { ethers } from 'ethers';
+import styles from './App.module.css';
 import wavePortalJson from './utils/WavePortal.json';
+import { isWindowWithEthereum, useWallet } from './useWallet/useWallet';
+import { ConnectWalletButton } from './Buttons/ConnectWalletButton/ConnectWalletButton';
+import { WaveButton } from './Buttons/WaveButton/WaveButton';
 
 function App() {
   const { connectWallet } = useWallet();
@@ -34,9 +37,11 @@ function App() {
 
   return (
     <div>
-      <h1>Solidity Wave Portal</h1>
-      <button onClick={connectWallet}>Connect Ethereum Wallet</button>
-      <button onClick={wave}>Wave</button>
+      <div className={styles.app}>
+        <h1>Solidity Wave Portal</h1>
+        <ConnectWalletButton connectWallet={connectWallet} />
+        <WaveButton wave={wave} />
+      </div>
     </div>
   );
 }
