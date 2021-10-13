@@ -1,33 +1,14 @@
-import { useEffect } from 'react';
-
-interface WindowWithEtherum extends Window {
-  ethereum: any;
-}
-
-const isWindowWithEtherum = (window: Window): window is WindowWithEtherum => {
-  return (window as WindowWithEtherum)?.ethereum;
-};
+import { useWallet } from './useWallet/useWallet';
 
 function App() {
-  const checkWalletConnection = (): void => {
-    if (isWindowWithEtherum(window)) {
-      const { ethereum } = window;
+  const { currentAccount, connectWallet } = useWallet();
 
-      if (!ethereum) {
-        console.log('Please ensure Metamask is connected');
-      } else {
-        console.log('Ethereum object: ', ethereum);
-      }
-    }
-  };
-
-  useEffect(() => {
-    checkWalletConnection();
-  }, []);
+  console.log('currentAccount: ', currentAccount);
 
   return (
     <div>
       <h1>Solidity Wave Portal</h1>
+      <button onClick={connectWallet}>Connect Ethereum Wallet</button>
     </div>
   );
 }
