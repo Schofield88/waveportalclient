@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from '../Buttons.module.css';
 
 const WaveButton: FC<{ wave: () => Promise<void> }> = ({ wave }) => (
-  <button className={styles.widthAndHeight} onClick={wave}>
+  <button className={styles.seventyFiveWidth} onClick={wave}>
     Wave
   </button>
 );

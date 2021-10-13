@@ -5,8 +5,17 @@
   margin-right: auto;
 }
 
-.widthAndHeight {
+.height {
+  height: 30px;
+}
+
+.seventyFiveWidth {
   composes: centred;
+  composes: height;
   width: 75%;
-  height: 25px;
+}
+
+.small {
+  composes: height;
+  width: 20%;
 }

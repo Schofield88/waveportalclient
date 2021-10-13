@@ -36,12 +36,12 @@ function App() {
   };
 
   return (
-    <div>
-      <div className={styles.app}>
+    <div className={styles.app}>
+      <div className={styles.flex}>
         <h1>Solidity Wave Portal</h1>
         <ConnectWalletButton connectWallet={connectWallet} />
-        <WaveButton wave={wave} />
       </div>
+      <WaveButton wave={wave} />
     </div>
   );
 }
