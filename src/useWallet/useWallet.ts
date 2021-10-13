@@ -17,7 +17,7 @@ const useWallet = () => {
         method: 'eth_requestAccounts',
       });
 
-      console.log('Connected', accounts[0]);
+      console.log('Connected: ', accounts[0]);
       updateCurrentAccount(accounts[0]);
     }
   };
@@ -49,4 +49,4 @@ const useWallet = () => {
   return { currentAccount, connectWallet };
 };
 
-export { useWallet };
+export { useWallet, isWindowWithEthereum };
