@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import styles from './Wave.module.css';
 import { WaveButton } from '../Buttons/WaveButton/WaveButton';
 
 const Wave: FC<{ wave: () => Promise<void>; waveCount: string }> = ({
@@ -7,7 +8,7 @@ const Wave: FC<{ wave: () => Promise<void>; waveCount: string }> = ({
 }) => {
   return (
     <div>
-      <div>{waveCount}</div>
+      <div className={styles.counter}>{waveCount}</div>
       <WaveButton wave={wave} />
     </div>
   );
