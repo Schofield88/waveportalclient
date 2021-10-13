@@ -3,10 +3,12 @@ import styles from './App.module.css';
 import wavePortalJson from './utils/WavePortal.json';
 import { isWindowWithEthereum, useWallet } from './useWallet/useWallet';
 import { ConnectWalletButton } from './Buttons/ConnectWalletButton/ConnectWalletButton';
-import { WaveButton } from './Buttons/WaveButton/WaveButton';
+import { Wave } from './Wave/Wave';
+import { useWave } from './useWave/useWave';
 
 function App() {
   const { connectWallet } = useWallet();
+  const { numberOfWaves, sendAWave } = useWave();
 
   const wave = async () => {
     if (isWindowWithEthereum(window)) {
@@ -21,17 +23,7 @@ function App() {
         signer,
       );
 
-      const count = await wavePortalContract.getTotalWaves();
-      console.log('Total wave count: ', count.toString());
-
-      const waveTxn = await wavePortalContract.wave();
-      console.log('Mining: ', waveTxn.hash);
-      await waveTxn.wait();
-
-      console.log('Mined -- ', waveTxn.hash);
-
-      const newCount = await wavePortalContract.getTotalWaves();
-      console.log('Total wave count: ', newCount.toString());
+      await sendAWave(wavePortalContract);
     }
   };
 
@@ -41,7 +33,7 @@ function App() {
         <h1>Solidity Wave Portal</h1>
         <ConnectWalletButton connectWallet={connectWallet} />
       </div>
-      <WaveButton wave={wave} />
+      <Wave wave={wave} waveCount={numberOfWaves} />
     </div>
   );
 }
