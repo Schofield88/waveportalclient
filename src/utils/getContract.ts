@@ -9,7 +9,7 @@ const getContract = (): Contract | null => {
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
-  const contractAddress = '0xfb6d6Ca53E70Bec17Dc0A584494d8FF716BC1AA2';
+  const contractAddress = '0x8ee13c0798fAb958736E55c213A059eA87E82599';
   const contractABI = wavePortalJson.abi;
 
   return new ethers.Contract(contractAddress, contractABI, signer);

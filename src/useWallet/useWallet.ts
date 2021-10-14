@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useWave } from '../useWave/useWave';
 
 interface WindowWithEthereum extends Window {
   ethereum: any;
@@ -10,6 +11,7 @@ const isWindowWithEthereum = (window: Window): window is WindowWithEthereum => {
 
 const useWallet = () => {
   const [currentAccount, updateCurrentAccount] = useState<string>('');
+  const { getAllWavesFromContract } = useWave();
 
   const connectWallet = async () => {
     if (isWindowWithEthereum(window)) {
@@ -34,7 +36,7 @@ const useWallet = () => {
 
       ethereum
         .request({ method: 'eth_accounts' })
-        .then((accounts: string[]) => {
+        .then(async (accounts: string[]) => {
           if (accounts.length !== 0) {
             const account = accounts[0];
             console.log('Found an authorized account:', account);
@@ -44,7 +46,7 @@ const useWallet = () => {
           }
         });
     }
-  }, []);
+  }, [getAllWavesFromContract]);
 
   return { currentAccount, connectWallet };
 };

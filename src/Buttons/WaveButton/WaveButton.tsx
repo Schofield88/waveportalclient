@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import styles from '../Buttons.module.css';
 
-const WaveButton: FC<{ wave: () => Promise<void> }> = ({ wave }) => (
-  <button className={styles.seventyFiveWidth} onClick={wave}>
-    Wave
-  </button>
+const WaveButton: FC = () => (
+  <input type="submit" value="Wave!" className={styles.seventyFiveWidth} />
 );
 
 export { WaveButton };

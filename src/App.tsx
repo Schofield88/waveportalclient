@@ -3,10 +3,16 @@ import { useWallet } from './useWallet/useWallet';
 import { ConnectWalletButton } from './Buttons/ConnectWalletButton/ConnectWalletButton';
 import { Wave } from './Wave/Wave';
 import { useWave } from './useWave/useWave';
+import { useEffect } from 'react';
 
 function App() {
-  const { connectWallet } = useWallet();
-  const { numberOfWaves, sendAWave } = useWave();
+  const { connectWallet, currentAccount } = useWallet();
+  const { allWaves, numberOfWaves, sendAWave, getAllWavesFromContract } =
+    useWave();
+
+  useEffect(() => {
+    getAllWavesFromContract();
+  }, [currentAccount, getAllWavesFromContract]);
 
   return (
     <div className={styles.app}>
@@ -14,7 +20,11 @@ function App() {
         <h1>Solidity Wave Portal</h1>
         <ConnectWalletButton connectWallet={connectWallet} />
       </div>
-      <Wave wave={sendAWave} waveCount={numberOfWaves} />
+      <Wave
+        allWaves={allWaves}
+        sendAWave={sendAWave}
+        waveCount={numberOfWaves}
+      />
     </div>
   );
 }
