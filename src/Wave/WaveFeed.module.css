@@ -1,0 +1,26 @@
+.borderRadius {
+  border-radius: 5px;
+}
+
+.wave {
+  composes: borderRadius;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.flex {
+  display: flex;
+}
+
+.address {
+  composes: borderRadius;
+  margin-right: 15px;
+  background: rebeccapurple;
+  padding: 5px 10px;
+}
+
+.timeStamp {
+  composes: borderRadius;
+  padding: 5px 10px;
+  background: burlywood;
+}

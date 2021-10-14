@@ -1,12 +1,17 @@
 import { FC } from 'react';
 import { IWave } from '../useWave/useWave';
+import styles from './WaveFeed.module.css';
 
 const WaveInfo: FC<{ wave: IWave }> = ({ wave }) => {
   return (
-    <div>
+    <div className={styles.wave}>
       <div>Message: {wave.message}</div>
-      <div>Address: {wave.waver}</div>
-      <div>Time: {wave.timeStamp.toDateString()}</div>
+      <div className={styles.flex}>
+        <div className={styles.address}>Address: {wave.waver}</div>
+        <div className={styles.timeStamp}>
+          Time: {wave.timeStamp.toDateString()}
+        </div>
+      </div>
     </div>
   );
 };
